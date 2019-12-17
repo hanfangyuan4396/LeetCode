@@ -7,6 +7,7 @@ int Dec2Bin(int dec, int len, vector<int>& bin);
 vector<int> ReverseVector(vector<int>& vec);
 int power(int times);
 vector<vector<int>> subsets(vector<int>& nums);
+vector<vector<int>> subsets_2(vector<int>& nums);
 int main()
 {
 	vector<int> nums;
@@ -14,7 +15,7 @@ int main()
 	nums.push_back(2);
 	nums.push_back(3);
 	nums.push_back(4);
-	vector<vector<int>> sets(subsets(nums));
+	vector<vector<int>> sets(subsets_2(nums));
 	for (int i = 0; i < power(nums.size()); i++)
 	{
 		for (int j = 0; j < sets[i].size(); j++)
@@ -23,8 +24,6 @@ int main()
 		}
 		cout << endl;
 	}
-	cout << "This is a test!";
-	cout << "This is a second test!";
 	system("pause");
 	return 0;
 }
@@ -96,4 +95,24 @@ vector<vector<int>> subsets(vector<int>& nums)
 	}
 	return subVec;
 	
+}
+
+vector<vector<int>> subsets_2(vector<int>& nums)
+{
+	vector<vector<int>> res;
+	vector<int> temp;
+	int len = nums.size();
+	for (int i = 0; i < 1 << len; i++)
+	{
+		for (int j = 0; j < len; j++)
+		{
+			if (i >> j & 1)
+			{
+				temp.push_back(nums[j]);
+			}
+		}
+		res.push_back(temp);
+		temp.clear();
+	}
+	return res;
 }
